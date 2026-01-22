@@ -12,13 +12,13 @@ Ce dépôt contient des tableaux de bord Grafana pour la visualisation des donn�
 1. Clonez ce dépôt sur votre machine locale :
 
    ```bash
-   git clone https://github.com/votre-utilisateur/votre-repo.git
+   git clone https://github.com/malahboub/grafana_dashboards.git
    ```
 
 2. Accédez au répertoire du projet :
 
    ```bash
-   cd votre-repo
+   cd grafana_dashboards
    ```
 
 3. Importez le tableau de bord dans Grafana :
