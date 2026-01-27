@@ -9,7 +9,612 @@
       "pluginName": "Prometheus"
     }
   ],
-  "__elements": {},
+  "__elements": {
+    "cfbfprf8m4cu8a": {
+      "name": "Target Metric ($hpa)",
+      "uid": "cfbfprf8m4cu8a",
+      "kind": 1,
+      "model": {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS__VICTORIAMETRICS-PROD}"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "never",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byFrameRefID",
+                "options": "A"
+              },
+              "properties": [
+                {
+                  "id": "custom.lineStyle",
+                  "value": {
+                    "dash": [
+                      10,
+                      15
+                    ],
+                    "fill": "dash"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "maxHeight": 600,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "11.6.3+security-01",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "b34d43a5-6d7a-4fbf-ba37-6e297a4ce5f0"
+            },
+            "editorMode": "code",
+            "expr": "kube_horizontalpodautoscaler_spec_target_metric{namespace=~\"$NameSpace\", horizontalpodautoscaler=~\"$hpa\"}",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "target ({{metric_name}}: {{metric_target_type}})",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "b34d43a5-6d7a-4fbf-ba37-6e297a4ce5f0"
+            },
+            "editorMode": "code",
+            "expr": "kube_horizontalpodautoscaler_status_target_metric{namespace=~\"$NameSpace\", horizontalpodautoscaler=~\"$hpa\"}\n  and on(metric_name, metric_target_type)\n    kube_horizontalpodautoscaler_spec_target_metric{namespace=~\"$NameSpace\", horizontalpodautoscaler=~\"$hpa\"}",
+            "hide": false,
+            "legendFormat": "current ({{metric_name}}: {{metric_target_type}})",
+            "range": true,
+            "refId": "B"
+          }
+        ],
+        "title": "Target Metric ($hpa)",
+        "type": "timeseries"
+      }
+    },
+    "bfbfps4nox91cd": {
+      "name": "Replicas ($hpa)",
+      "uid": "bfbfps4nox91cd",
+      "kind": 1,
+      "model": {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS__VICTORIAMETRICS-PROD}"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byFrameRefID",
+                "options": "A"
+              },
+              "properties": [
+                {
+                  "id": "custom.lineStyle",
+                  "value": {
+                    "dash": [
+                      10,
+                      15
+                    ],
+                    "fill": "dash"
+                  }
+                },
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "purple",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byFrameRefID",
+                "options": "D"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "blue",
+                    "mode": "fixed"
+                  }
+                },
+                {
+                  "id": "custom.lineStyle",
+                  "value": {
+                    "dash": [
+                      10,
+                      15
+                    ],
+                    "fill": "dash"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byFrameRefID",
+                "options": "C"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "fixedColor": "green",
+                    "mode": "fixed"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "options": {
+          "legend": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "displayMode": "table",
+            "placement": "right",
+            "showLegend": true
+          },
+          "tooltip": {
+            "hideZeros": false,
+            "maxHeight": 600,
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "11.6.3+security-01",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "b34d43a5-6d7a-4fbf-ba37-6e297a4ce5f0"
+            },
+            "editorMode": "code",
+            "expr": "kube_horizontalpodautoscaler_spec_max_replicas{namespace=~\"$NameSpace\", horizontalpodautoscaler=~\"$hpa\"}",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "max",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "b34d43a5-6d7a-4fbf-ba37-6e297a4ce5f0"
+            },
+            "editorMode": "code",
+            "expr": "kube_horizontalpodautoscaler_status_desired_replicas{namespace=~\"$NameSpace\", horizontalpodautoscaler=~\"$hpa\"}",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "desired",
+            "range": true,
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "b34d43a5-6d7a-4fbf-ba37-6e297a4ce5f0"
+            },
+            "editorMode": "code",
+            "expr": "kube_horizontalpodautoscaler_status_current_replicas{namespace=~\"$NameSpace\", horizontalpodautoscaler=~\"$hpa\"}",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "current",
+            "range": true,
+            "refId": "C"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "b34d43a5-6d7a-4fbf-ba37-6e297a4ce5f0"
+            },
+            "editorMode": "code",
+            "expr": "kube_horizontalpodautoscaler_spec_min_replicas{namespace=~\"$NameSpace\", horizontalpodautoscaler=~\"$hpa\"}",
+            "hide": false,
+            "interval": "",
+            "legendFormat": "min",
+            "range": true,
+            "refId": "D"
+          }
+        ],
+        "title": "Replicas ($hpa)",
+        "type": "timeseries"
+      }
+    },
+    "bfbfxkeekq0aoc": {
+      "name": "Max Replicas",
+      "uid": "bfbfxkeekq0aoc",
+      "kind": 1,
+      "model": {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS__VICTORIAMETRICS-PROD}"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "text",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.6.3+security-01",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "b34d43a5-6d7a-4fbf-ba37-6e297a4ce5f0"
+            },
+            "editorMode": "code",
+            "expr": "kube_horizontalpodautoscaler_spec_max_replicas{namespace=~\"$NameSpace\", horizontalpodautoscaler=~\"$hpa\"}",
+            "legendFormat": "{{horizontalpodautoscaler}} - {{namespace}}",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Max Replicas",
+        "type": "stat"
+      }
+    },
+    "afbfxkzicc6iof": {
+      "name": "Current Replicas",
+      "uid": "afbfxkzicc6iof",
+      "kind": 1,
+      "model": {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS__VICTORIAMETRICS-PROD}"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.6.3+security-01",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "b34d43a5-6d7a-4fbf-ba37-6e297a4ce5f0"
+            },
+            "editorMode": "code",
+            "expr": "kube_horizontalpodautoscaler_status_current_replicas{namespace=~\"$NameSpace\", horizontalpodautoscaler=~\"$hpa\"}",
+            "legendFormat": "{{horizontalpodautoscaler}} - {{namespace}}",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Current Replicas",
+        "type": "stat"
+      }
+    },
+    "efbfxlbje8glcd": {
+      "name": "Min Replicas",
+      "uid": "efbfxlbje8glcd",
+      "kind": 1,
+      "model": {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS__VICTORIAMETRICS-PROD}"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "text",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "short"
+          },
+          "overrides": []
+        },
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.6.3+security-01",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "b34d43a5-6d7a-4fbf-ba37-6e297a4ce5f0"
+            },
+            "editorMode": "code",
+            "expr": "kube_horizontalpodautoscaler_spec_min_replicas{namespace=~\"$NameSpace\", horizontalpodautoscaler=~\"$hpa\"}",
+            "legendFormat": "{{horizontalpodautoscaler}} - {{namespace}}",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Min Replicas",
+        "type": "stat"
+      }
+    },
+    "bfbfxm0nazp4wf": {
+      "name": "Status Condition",
+      "uid": "bfbfxm0nazp4wf",
+      "kind": 1,
+      "model": {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS__VICTORIAMETRICS-PROD}"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [
+              {
+                "options": {
+                  "0": {
+                    "index": 1,
+                    "text": "No"
+                  },
+                  "1": {
+                    "index": 0,
+                    "text": "Yes"
+                  }
+                },
+                "type": "value"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "transparent",
+                  "value": null
+                },
+                {
+                  "color": "super-light-purple",
+                  "value": 1
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "percentChangeColorMode": "standard",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "text": {},
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "11.6.3+security-01",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "b34d43a5-6d7a-4fbf-ba37-6e297a4ce5f0"
+            },
+            "editorMode": "code",
+            "expr": "kube_horizontalpodautoscaler_status_condition{namespace=~\"$NameSpace\", horizontalpodautoscaler=~\"$hpa\"}",
+            "legendFormat": "{{condition}}: {{status}}",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Status Condition",
+        "type": "stat"
+      }
+    }
+  },
   "__requires": [
     {
       "type": "panel",
@@ -78,15 +683,6 @@
   "id": null,
   "links": [
     {
-      "icon": "bolt",
-      "tags": [],
-      "targetBlank": true,
-      "title": "Update",
-      "tooltip": "See more dashboards",
-      "type": "link",
-      "url": "https://github.com/malahboub/grafana_dashboards"
-    },
-    {
       "$$hashKey": "object:831",
       "icon": "question",
       "tags": [
@@ -95,15 +691,6 @@
       "targetBlank": true,
       "title": "GitHub",
       "tooltip": "View more dashboards",
-      "type": "link",
-      "url": "https://github.com/malahboub/grafana_dashboards"
-    },
-    {
-      "icon": "bolt",
-      "tags": [],
-      "targetBlank": true,
-      "title": "Update",
-      "tooltip": "See more dashboards",
       "type": "link",
       "url": "https://github.com/malahboub/grafana_dashboards"
     }
@@ -2111,6 +2698,102 @@
                 "value": 80
               }
             ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 30
+      },
+      "id": 104,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.6.3+security-01",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "sum(increase(kube_pod_container_status_restarts_total{pod=~\"$Pod\"}[1h]))",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS__VICTORIAMETRICS-PROD}"
+          }
+        }
+      ],
+      "title": "Pod restarts (1 hour)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS__VICTORIAMETRICS-PROD}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
           },
           "unit": "short"
         },
@@ -2120,7 +2803,7 @@
         "h": 9,
         "w": 24,
         "x": 0,
-        "y": 30
+        "y": 36
       },
       "id": 92,
       "options": {
@@ -2218,7 +2901,7 @@
         "h": 9,
         "w": 24,
         "x": 0,
-        "y": 39
+        "y": 45
       },
       "id": 94,
       "options": {
@@ -2680,7 +3363,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 48
+        "y": 54
       },
       "id": 47,
       "options": {
@@ -3193,7 +3876,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 56
+        "y": 62
       },
       "id": 82,
       "options": {
@@ -3336,7 +4019,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 56
+        "y": 62
       },
       "id": 84,
       "options": {
@@ -3403,7 +4086,98 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 65
+        "y": 71
+      },
+      "id": 105,
+      "panels": [],
+      "title": "HPA",
+      "type": "row"
+    },
+    {
+      "gridPos": {
+        "h": 9,
+        "w": 9,
+        "x": 0,
+        "y": 72
+      },
+      "id": 106,
+      "libraryPanel": {
+        "uid": "cfbfprf8m4cu8a",
+        "name": "Target Metric ($hpa)"
+      }
+    },
+    {
+      "gridPos": {
+        "h": 9,
+        "w": 9,
+        "x": 9,
+        "y": 72
+      },
+      "id": 107,
+      "libraryPanel": {
+        "uid": "bfbfps4nox91cd",
+        "name": "Replicas ($hpa)"
+      }
+    },
+    {
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 18,
+        "y": 72
+      },
+      "id": 108,
+      "libraryPanel": {
+        "uid": "bfbfxkeekq0aoc",
+        "name": "Max Replicas"
+      }
+    },
+    {
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 18,
+        "y": 75
+      },
+      "id": 110,
+      "libraryPanel": {
+        "uid": "afbfxkzicc6iof",
+        "name": "Current Replicas"
+      }
+    },
+    {
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 18,
+        "y": 78
+      },
+      "id": 109,
+      "libraryPanel": {
+        "uid": "efbfxlbje8glcd",
+        "name": "Min Replicas"
+      }
+    },
+    {
+      "gridPos": {
+        "h": 5,
+        "w": 24,
+        "x": 0,
+        "y": 81
+      },
+      "id": 111,
+      "libraryPanel": {
+        "uid": "bfbfxm0nazp4wf",
+        "name": "Status Condition"
+      }
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 86
       },
       "id": 61,
       "panels": [],
@@ -3757,7 +4531,7 @@
         "h": 9,
         "w": 24,
         "x": 0,
-        "y": 66
+        "y": 87
       },
       "id": 87,
       "options": {
@@ -4103,7 +4877,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 75
+        "y": 96
       },
       "id": 95,
       "options": {
@@ -4201,7 +4975,7 @@
         "h": 9,
         "w": 24,
         "x": 0,
-        "y": 83
+        "y": 104
       },
       "id": 96,
       "options": {
@@ -4315,7 +5089,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 92
+        "y": 113
       },
       "id": 91,
       "options": {
@@ -4442,7 +5216,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 92
+        "y": 113
       },
       "id": 59,
       "options": {
@@ -4489,7 +5263,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 100
+        "y": 121
       },
       "id": 99,
       "panels": [],
@@ -4718,7 +5492,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 101
+        "y": 122
       },
       "id": 9,
       "options": {
@@ -4895,7 +5669,7 @@
         "h": 10,
         "w": 24,
         "x": 0,
-        "y": 108
+        "y": 129
       },
       "id": 100,
       "options": {
@@ -4993,7 +5767,7 @@
         "h": 10,
         "w": 24,
         "x": 0,
-        "y": 118
+        "y": 139
       },
       "id": 101,
       "options": {
@@ -5091,7 +5865,7 @@
         "h": 10,
         "w": 24,
         "x": 0,
-        "y": 128
+        "y": 149
       },
       "id": 102,
       "options": {
@@ -5189,7 +5963,7 @@
         "h": 10,
         "w": 24,
         "x": 0,
-        "y": 138
+        "y": 159
       },
       "id": 103,
       "options": {
@@ -5339,7 +6113,6 @@
         "type": "query"
       },
       {
-        "allValue": ".*",
         "current": {},
         "datasource": {
           "type": "prometheus",
@@ -5348,6 +6121,7 @@
         "definition": "label_values(kube_pod_container_info{origin_prometheus=~\"$origin_prometheus\",cluster=~\"$Cluster\",cluster=~\"$Cluster\",namespace=~\"$NameSpace\",container=~\"$Container\"},pod)",
         "includeAll": true,
         "label": "Pod",
+        "multi": true,
         "name": "Pod",
         "options": [],
         "query": {
@@ -5357,6 +6131,25 @@
         "refresh": 2,
         "regex": "",
         "sort": 5,
+        "type": "query"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS__VICTORIAMETRICS-PROD}"
+        },
+        "definition": "label_values(kube_horizontalpodautoscaler_info{namespace=~\"$NameSpace\"}, horizontalpodautoscaler)",
+        "includeAll": false,
+        "name": "hpa",
+        "options": [],
+        "query": {
+          "query": "label_values(kube_horizontalpodautoscaler_info{namespace=~\"$NameSpace\"}, horizontalpodautoscaler)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 2,
+        "regex": "",
+        "sort": 1,
         "type": "query"
       }
     ]
@@ -5378,6 +6171,6 @@
   "timezone": "browser",
   "title": "K8S Overview",
   "uid": "ff6l91gqhb8smld",
-  "version": 3,
+  "version": 4,
   "weekStart": ""
 }
