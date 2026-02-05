@@ -613,6 +613,224 @@
         "title": "Status Condition",
         "type": "stat"
       }
+    },
+    "bf20puj7xagowd": {
+      "name": "K8S Events Containers",
+      "uid": "bf20puj7xagowd",
+      "kind": 1,
+      "model": {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${DS__VICTORIAMETRICS-PROD}"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "auto",
+              "cellOptions": {
+                "type": "auto"
+              },
+              "filterable": true,
+              "inspect": false
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "options": {
+          "cellHeight": "sm",
+          "footer": {
+            "countRows": false,
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "showHeader": true,
+          "sortBy": [
+            {
+              "desc": true,
+              "displayName": "timestamp"
+            }
+          ]
+        },
+        "pluginVersion": "11.6.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "disableTextWrap": false,
+            "editorMode": "builder",
+            "expr": "kube_pod_container_status_last_terminated_timestamp * 1000",
+            "format": "table",
+            "fullMetaSearch": false,
+            "hide": false,
+            "includeNullMetadata": true,
+            "instant": false,
+            "legendFormat": "__auto",
+            "range": true,
+            "refId": "B",
+            "useBackend": false
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "prometheus"
+            },
+            "disableTextWrap": false,
+            "editorMode": "builder",
+            "expr": "kube_pod_container_status_last_terminated_reason",
+            "format": "table",
+            "fullMetaSearch": false,
+            "hide": false,
+            "includeNullMetadata": true,
+            "instant": false,
+            "legendFormat": "__auto",
+            "range": true,
+            "refId": "C",
+            "useBackend": false
+          }
+        ],
+        "title": "K8S Events Containers",
+        "transformations": [
+          {
+            "id": "joinByField",
+            "options": {
+              "byField": "pod",
+              "mode": "outerTabular"
+            }
+          },
+          {
+            "id": "convertFieldType",
+            "options": {
+              "conversions": [
+                {
+                  "destinationType": "time",
+                  "targetField": "Value #B"
+                }
+              ],
+              "fields": {}
+            }
+          },
+          {
+            "id": "calculateField",
+            "options": {
+              "binary": {
+                "left": {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Time 1"
+                  }
+                },
+                "operator": "-",
+                "right": {
+                  "matcher": {
+                    "id": "byName",
+                    "options": "Value #B"
+                  }
+                }
+              },
+              "mode": "binary",
+              "reduce": {
+                "reducer": "sum"
+              }
+            }
+          },
+          {
+            "id": "filterByValue",
+            "options": {
+              "filters": [
+                {
+                  "config": {
+                    "id": "lower",
+                    "options": {
+                      "value": "3720000"
+                    }
+                  },
+                  "fieldName": "Time 1 - Value #B"
+                }
+              ],
+              "match": "all",
+              "type": "include"
+            }
+          },
+          {
+            "id": "groupBy",
+            "options": {
+              "fields": {
+                "Time - Value": {
+                  "aggregations": [
+                    "min"
+                  ],
+                  "operation": "aggregate"
+                },
+                "Time 1 - Value #B": {
+                  "aggregations": [
+                    "min"
+                  ],
+                  "operation": "aggregate"
+                },
+                "Value": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                },
+                "Value #B": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                },
+                "namespace": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                },
+                "pod": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                },
+                "reason": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                }
+              }
+            }
+          },
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "Time 1 - Value #B (min)": true,
+                "namespace 2": true
+              },
+              "includeByName": {},
+              "indexByName": {},
+              "renameByName": {
+                "Value #B": "timestamp",
+                "namespace 1": "namespace"
+              }
+            }
+          }
+        ],
+        "type": "table"
+      }
     }
   },
   "__requires": [
@@ -683,6 +901,15 @@
   "id": null,
   "links": [
     {
+      "icon": "bolt",
+      "tags": [],
+      "targetBlank": true,
+      "title": "Update",
+      "tooltip": "See more dashboards",
+      "type": "link",
+      "url": "https://github.com/malahboub/grafana_dashboards"
+    },
+    {
       "$$hashKey": "object:831",
       "icon": "question",
       "tags": [
@@ -691,6 +918,15 @@
       "targetBlank": true,
       "title": "GitHub",
       "tooltip": "View more dashboards",
+      "type": "link",
+      "url": "https://github.com/malahboub/grafana_dashboards"
+    },
+    {
+      "icon": "bolt",
+      "tags": [],
+      "targetBlank": true,
+      "title": "Update",
+      "tooltip": "See more dashboards",
       "type": "link",
       "url": "https://github.com/malahboub/grafana_dashboards"
     }
@@ -4185,6 +4421,19 @@
       "type": "row"
     },
     {
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 87
+      },
+      "id": 112,
+      "libraryPanel": {
+        "uid": "bf20puj7xagowd",
+        "name": "K8S Events Containers"
+      }
+    },
+    {
       "datasource": {
         "type": "prometheus",
         "uid": "${DS__VICTORIAMETRICS-PROD}"
@@ -4531,7 +4780,7 @@
         "h": 9,
         "w": 24,
         "x": 0,
-        "y": 87
+        "y": 95
       },
       "id": 87,
       "options": {
@@ -4877,7 +5126,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 96
+        "y": 104
       },
       "id": 95,
       "options": {
@@ -4975,7 +5224,7 @@
         "h": 9,
         "w": 24,
         "x": 0,
-        "y": 104
+        "y": 112
       },
       "id": 96,
       "options": {
@@ -5089,7 +5338,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 113
+        "y": 121
       },
       "id": 91,
       "options": {
@@ -5216,7 +5465,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 113
+        "y": 121
       },
       "id": 59,
       "options": {
@@ -5263,7 +5512,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 121
+        "y": 129
       },
       "id": 99,
       "panels": [],
@@ -5492,7 +5741,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 122
+        "y": 130
       },
       "id": 9,
       "options": {
@@ -5669,7 +5918,7 @@
         "h": 10,
         "w": 24,
         "x": 0,
-        "y": 129
+        "y": 137
       },
       "id": 100,
       "options": {
@@ -5767,7 +6016,7 @@
         "h": 10,
         "w": 24,
         "x": 0,
-        "y": 139
+        "y": 147
       },
       "id": 101,
       "options": {
@@ -5865,7 +6114,7 @@
         "h": 10,
         "w": 24,
         "x": 0,
-        "y": 149
+        "y": 157
       },
       "id": 102,
       "options": {
@@ -5963,7 +6212,7 @@
         "h": 10,
         "w": 24,
         "x": 0,
-        "y": 159
+        "y": 167
       },
       "id": 103,
       "options": {
@@ -6171,6 +6420,6 @@
   "timezone": "browser",
   "title": "K8S Overview",
   "uid": "ff6l91gqhb8smld",
-  "version": 4,
+  "version": 5,
   "weekStart": ""
 }
